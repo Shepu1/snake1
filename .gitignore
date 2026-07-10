@@ -1,0 +1,27 @@
+# Buildozer / Android build
+.buildozer/
+bin/
+.gradle/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.eggs/
+
+# Windows build leftovers
+build/
+dist/
+*.spec.bak
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local save (optional — uncomment if you don't want to upload player saves)
+# game_data.txt

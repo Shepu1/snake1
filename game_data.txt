@@ -1,0 +1,18 @@
+level:1
+lifetime_score:0
+current_skin:classic
+game_mode:Classic
+movement_style:Robotic
+fps:10
+step:30
+music_volume:0.5
+sound_volume:0.5
+music_index:0
+bg_effect:True
+player_name:
+control_mode:swipe
+control_setup_done:False
+joystick_side:right
+Classic:0
+Time Attack:0
+No Wall:0
