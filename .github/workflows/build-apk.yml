@@ -1,0 +1,50 @@
+name: Build Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq \
+            python3-pip build-essential git zip unzip \
+            openjdk-17-jdk autoconf libtool pkg-config \
+            zlib1g-dev libncurses5-dev libncursesw5-dev \
+            cmake libffi-dev libssl-dev
+          sudo apt-get install -y libtinfo5 2>/dev/null || sudo apt-get install -y libtinfo6 || true
+
+      - name: Install Buildozer
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install buildozer cython==0.29.36 scons
+
+      - name: Clean old build cache
+        run: buildozer appclean || true
+
+      - name: Build APK
+        env:
+          USE_SDK_WRAPPER: "1"
+          BUILDOZER_WARN_ON_ROOT: "0"
+        run: buildozer -v android debug
+
+      - name: List built APK files
+        run: ls -lh bin/
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ShepusSnake-APK
+          path: bin/*.apk
+          if-no-files-found: error
+          retention-days: 30
