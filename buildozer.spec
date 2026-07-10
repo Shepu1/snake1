@@ -19,8 +19,8 @@ source.include_exts = py,png,jpg,jpeg,wav,mp3,ttf,ico,txt
 version = 1.0.0
 
 # (list) Application requirements
-# pygame + Android: Python 3.10 পিন করতে হয় (3.11+ এ build fail হয়)
-requirements = python3==3.10.12, hostpython3==3.10.12, kivy==2.3.0, pyjnius==1.5.0, pygame, android
+# Kivy 2.3.0 এর জন্য Cython 3.x প্রয়োজন (যা GitHub Action-এ আপডেট করা হয়েছে)
+requirements = python3, kivy==2.3.0, pyjnius==1.5.0, android
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = landscape
@@ -32,8 +32,8 @@ fullscreen = 1
 # Android specific
 #
 
-# (int) Target Android API, should be as high as possible.
-android.api = 33
+# (int) Target Android API (Play Store এর নিয়ম অনুযায়ী 34 রাখা নিরাপদ)
+android.api = 34
 
 # (int) Minimum API your APK will support.
 android.minapi = 21
@@ -64,7 +64,6 @@ android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,WAKE
 android.accept_sdk_license = True
 
 # (str) Bootstrap to use for android
-# pygame bootstrap launches main.py with SDL2
 bootstrap = sdl2
 
 # (str) Presplash of the application (লোডিং স্ক্রিন)
