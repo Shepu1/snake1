@@ -19,10 +19,13 @@ source.include_exts = py,png,jpg,jpeg,wav,mp3,ttf,ico,txt
 version = 1.0.0
 
 # (list) Application requirements
-# NOTE: kivy remove kora hoyeche - eta apnar game e use e hoy na (pure pygame game)
-# pygame = SDL2 bootstrap diye direct build hoy, onek fast ar stable
-# pyjnius + android = Android-specific screen size / storage path er jonno lage (utils.py te use hoy)
-requirements = python3,pygame,pyjnius==1.6.1,android
+# IMPORTANT: pyjnius er version pin kora hoyni ICHA kore.
+# python-for-android er nijer built-in pyjnius recipe (version 1.7.0) ache,
+# jeta already Cython 3.x compatibility issue ("long" bug) fix kora ache
+# (hostpython_prerequisites = Cython<3.2 + use_cython.patch diye).
+# Version pin korle (==1.6.1 er moto) eta bypass hoye generic pip build e
+# chole jay, jeta te notun Cython install hoy ar build fail kore.
+requirements = python3,pygame,pyjnius,android
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = landscape
@@ -53,7 +56,6 @@ android.permissions = INTERNET,WRITE_EXTERNAL_STORAGE,READ_EXTERNAL_STORAGE,WAKE
 android.accept_sdk_license = True
 
 # (str) Bootstrap to use for android
-# sdl2 bootstrap pygame ar kivy dutar jonno e kaj kore - eta thik ache
 bootstrap = sdl2
 
 # (str) Presplash of the application (loading screen)
